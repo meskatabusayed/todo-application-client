@@ -21,15 +21,19 @@ import { FormEvent, useState } from "react"
 const AddTodoModal = () => {
   const [task , setTask] = useState(" ");
   const [description , setDescription] = useState(" ");
+
   const dispatch = useAppDispatch();
   const handleSubmit = (e : FormEvent) => {
     e.preventDefault();
+    const randomString = Math.random().toString(36).substring(2 , 8);
     const taskDetails = {
+      id : randomString, //atar jonno type a kono issue korbe ki?
       title : task,
       description : description,
 
     }
     dispatch(addTodo(taskDetails));
+    console.log(taskDetails);
 
   }
   return (
