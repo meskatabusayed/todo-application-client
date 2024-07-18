@@ -44,4 +44,4 @@ export const baseApi = createApi({
   }),
 });
 
-export const { useGetTodosQuery, useAddTodoMutation } = baseApi;
+export const { useGetTodosQuery, useAddTodoMutation , useUpdateTodoMutation } = baseApi;
