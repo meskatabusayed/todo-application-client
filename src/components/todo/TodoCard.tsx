@@ -1,8 +1,10 @@
-import { useAppDispatch } from "@/redux/hook";
+
+// import { useAppDispatch } from "@/redux/hook";
 import { Button } from "../ui/button";
-import { removeTodo, toggleComplete } from "@/redux/features/todoSlice";
+import { removeTodo,  } from "@/redux/features/todoSlice";
+import { useUpdateTodoMutation } from "@/redux/api/api";
 type TTodoCardProps = {
-  id: string;
+  _id: string;
   title: string;
   description: string;
   isCompleted?: boolean;
@@ -11,22 +13,40 @@ type TTodoCardProps = {
 const TodoCard = ({
   title,
   description,
-  id,
+  _id,
   isCompleted,
   priority,
 }: TTodoCardProps) => {
   // const dispatch = useAppDispatch();
+  const [updateTodo , {isLoading}] = useUpdateTodoMutation();
 
   const toggleState = () => {
+
+    
+
     const taskData = {
+      
       title,
       description,
       priority,
       isCompleted : !isCompleted,
     }
-    console.log(taskData);
+    // console.log(taskData);
     // dispatch(toggleComplete(id));
+    const options = {
+      id : _id ,
+      data : {
+      title,
+      description,
+      priority,
+      isCompleted : !isCompleted,
+
+      }
+    } 
+    console.log(options);
+    updateTodo(options);
   };
+
   return (
     <div>
       <div className="bg-white rounded-md flex justify-between items-center p-3 border">
@@ -36,6 +56,7 @@ const TodoCard = ({
           type="checkbox"
           name="complete"
           id="complete"
+          defaultChecked = {isCompleted}
         />
         <p className="font-semibold flex-1">{title}</p>
         <div className="flex-1 flex items-center gap-2">
@@ -59,7 +80,7 @@ const TodoCard = ({
         <p className="flex-[2] ml-3">{description}</p>
         <div className="space-x-5">
           <Button
-            onClick={() => dispatch(removeTodo(id))}
+            // onClick={() => dispatch(removeTodo(id))}
             className="bg-red-500"
           >
             <svg

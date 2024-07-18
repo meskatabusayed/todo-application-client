@@ -31,12 +31,12 @@ export const baseApi = createApi({
       invalidatesTags: ["todo"],
     }),
     updateTodo: builder.mutation({
-      query: (data) => {
-        console.log("inside mutation", data);
+      query: (options) => {
+        console.log("inside mutation", options);
         return {
-          url: "/task",
-          method: "put",
-          body: data,
+          url: `/task/${options.id}`,
+          method: "PUT",
+          body: options.data,
         };
       },
       invalidatesTags: ["todo"],
