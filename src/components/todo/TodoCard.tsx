@@ -15,10 +15,17 @@ const TodoCard = ({
   isCompleted,
   priority,
 }: TTodoCardProps) => {
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
 
   const toggleState = () => {
-    dispatch(toggleComplete(id));
+    const taskData = {
+      title,
+      description,
+      priority,
+      isCompleted : !isCompleted,
+    }
+    console.log(taskData);
+    // dispatch(toggleComplete(id));
   };
   return (
     <div>
